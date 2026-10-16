@@ -1,0 +1,41 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum IssueCategory {
+  COMPUTER
+  PROJECTOR
+  FAN
+  LIGHT
+  WIFI
+}
+
+enum IssueStatus {
+  PENDING
+  IN_PROGRESS
+  RESOLVED
+}
+
+model Issue {
+  id            String        @id @default(cuid())
+  ticketCode    String        @unique
+  category      IssueCategory
+  title         String        @db.VarChar(120)
+  description   String        @db.VarChar(2000)
+  building      String        @db.VarChar(120)
+  room          String        @db.VarChar(60)
+  reporterName  String        @db.VarChar(120)
+  reporterEmail String        @db.VarChar(254)
+  imageData     String?       @db.Text
+  status        IssueStatus   @default(PENDING)
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  @@index([status, createdAt])
+  @@index([category, createdAt])
+}
