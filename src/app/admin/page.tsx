@@ -148,7 +148,7 @@ export default function AdminLoginPage() {
       </section>
 
       <footer className={styles.footer}>
-        <span>© 2026 Campus Fix</span>
+        <span>© 2026 Campus Fix Website</span>
         <span>Campus support &amp; facilities</span>
       </footer>
     </main>
